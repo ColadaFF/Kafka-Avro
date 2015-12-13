@@ -1,0 +1,27 @@
+{
+  "namespace": "Message",
+  "type": "record",
+  "name": "EventMessage",
+  "fields": [
+    {
+      "name": "machine",
+      "type": "string"
+    },
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "date",
+      "type": "string"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "building",
+      "type": "string"
+    }
+  ]
+}
