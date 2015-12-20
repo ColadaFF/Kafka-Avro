@@ -16,7 +16,7 @@ public class SimpleProducer {
 
     public SimpleProducer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "127.0.0.1:9092");
+        props.put("bootstrap.servers", "solr:9092");
         props.put("acks", "all");
         props.put("retries", 10);
         props.put("batch.size", 16384);

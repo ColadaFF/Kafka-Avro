@@ -14,9 +14,9 @@ public class SimpleConsumer {
 
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", "solr:9092");
         props.put("group.id", "test");
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000");
@@ -29,7 +29,7 @@ public class SimpleConsumer {
             ConsumerRecords<String, byte[]> records = consumer.poll(100);
             for (ConsumerRecord<String, byte[]> record : records) {
                 EventMessage eventMessage = new EventMessageDeserializer().DeserializeEvent(record.value());
-                System.out.printf("offset = %d, key = %s, value = %s", record.offset(), record.key(), eventMessage);
+                System.out.printf("offset = %d, key = %s, value = %s \n", record.offset(), record.key(), eventMessage);
             }
 
         }
