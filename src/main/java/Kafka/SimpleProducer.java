@@ -9,6 +9,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
+import java.util.Random;
 
 public class SimpleProducer {
     private final Producer<String, byte[]> kafkaProducer;
@@ -16,7 +17,7 @@ public class SimpleProducer {
 
     public SimpleProducer() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "127.0.0.1:9092");
+        props.put("bootstrap.servers", "192.168.1.54:9092");
         props.put("acks", "all");
         props.put("retries", 10);
         props.put("batch.size", 16384);
@@ -28,21 +29,26 @@ public class SimpleProducer {
     }
 
     public void publish(byte[] event, String Id) {
-        kafkaProducer.send(new ProducerRecord<String, byte[]>("test", Id, event));
-        kafkaProducer.close();
+        kafkaProducer.send(new ProducerRecord<String, byte[]>("play-stream", Id, event));
     }
 
     public static void main(String[] args) {
         SimpleProducer sp = new SimpleProducer();
         EventMessage event = new EventMessage();
-        event.setMachine("pump_1");
+        String[] machines = {"pump_1", "pump_2", "tank_1", "tank_2"};
         event.setBuilding("building_3");
         event.setId("5ba51e3");
-        event.setDate(new Date().toString());
-        event.setStatus(Float.toString(1.2f));
+        event.setDate(new Date().getTime());
+        float minX = 1f;
+        float maxX = 100.0f;
+        Random rand = new Random();
         try {
             EventMessageSerializer eventMessageSerializer = new EventMessageSerializer();
-            sp.publish(eventMessageSerializer.serializeMessage(event), event.getId().toString());
+            for (int i = 0; i < 10000; i++) {
+                event.setStatus(rand.nextFloat() * (maxX - minX) + minX);
+                event.setMachine(machines[new Random().nextInt(machines.length)]);
+                sp.publish(eventMessageSerializer.serializeMessage(event), event.getId().toString());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

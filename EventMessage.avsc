@@ -13,7 +13,7 @@
     },
     {
       "name": "date",
-      "type": "string"
+      "type": "long"
     },
     {
       "name": "status",

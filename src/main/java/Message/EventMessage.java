@@ -7,13 +7,13 @@ package Message;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EventMessage extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventMessage\",\"namespace\":\"Message\",\"fields\":[{\"name\":\"machine\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"date\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"},{\"name\":\"building\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventMessage\",\"namespace\":\"Message\",\"fields\":[{\"name\":\"machine\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"date\",\"type\":\"long\"},{\"name\":\"status\",\"type\":\"float\"},{\"name\":\"building\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.CharSequence machine;
-  @Deprecated public java.lang.CharSequence id;
-  @Deprecated public java.lang.CharSequence date;
-  @Deprecated public java.lang.CharSequence status;
-  @Deprecated public java.lang.CharSequence building;
+  @Deprecated public CharSequence machine;
+  @Deprecated public CharSequence id;
+  @Deprecated public long date;
+  @Deprecated public float status;
+  @Deprecated public CharSequence building;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -25,7 +25,7 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
   /**
    * All-args constructor.
    */
-  public EventMessage(java.lang.CharSequence machine, java.lang.CharSequence id, java.lang.CharSequence date, java.lang.CharSequence status, java.lang.CharSequence building) {
+  public EventMessage(CharSequence machine, CharSequence id, Long date, Float status, CharSequence building) {
     this.machine = machine;
     this.id = id;
     this.date = date;
@@ -35,7 +35,7 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
-  public java.lang.Object get(int field$) {
+  public Object get(int field$) {
     switch (field$) {
     case 0: return machine;
     case 1: return id;
@@ -47,13 +47,13 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
   }
   // Used by DatumReader.  Applications should not call. 
   @SuppressWarnings(value="unchecked")
-  public void put(int field$, java.lang.Object value$) {
+  public void put(int field$, Object value$) {
     switch (field$) {
-    case 0: machine = (java.lang.CharSequence)value$; break;
-    case 1: id = (java.lang.CharSequence)value$; break;
-    case 2: date = (java.lang.CharSequence)value$; break;
-    case 3: status = (java.lang.CharSequence)value$; break;
-    case 4: building = (java.lang.CharSequence)value$; break;
+    case 0: machine = (CharSequence)value$; break;
+    case 1: id = (CharSequence)value$; break;
+    case 2: date = (Long)value$; break;
+    case 3: status = (Float)value$; break;
+    case 4: building = (CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -61,7 +61,7 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
   /**
    * Gets the value of the 'machine' field.
    */
-  public java.lang.CharSequence getMachine() {
+  public CharSequence getMachine() {
     return machine;
   }
 
@@ -69,14 +69,14 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
    * Sets the value of the 'machine' field.
    * @param value the value to set.
    */
-  public void setMachine(java.lang.CharSequence value) {
+  public void setMachine(CharSequence value) {
     this.machine = value;
   }
 
   /**
    * Gets the value of the 'id' field.
    */
-  public java.lang.CharSequence getId() {
+  public CharSequence getId() {
     return id;
   }
 
@@ -84,14 +84,14 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.CharSequence value) {
+  public void setId(CharSequence value) {
     this.id = value;
   }
 
   /**
    * Gets the value of the 'date' field.
    */
-  public java.lang.CharSequence getDate() {
+  public Long getDate() {
     return date;
   }
 
@@ -99,14 +99,14 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
    * Sets the value of the 'date' field.
    * @param value the value to set.
    */
-  public void setDate(java.lang.CharSequence value) {
+  public void setDate(Long value) {
     this.date = value;
   }
 
   /**
    * Gets the value of the 'status' field.
    */
-  public java.lang.CharSequence getStatus() {
+  public Float getStatus() {
     return status;
   }
 
@@ -114,14 +114,14 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
    * Sets the value of the 'status' field.
    * @param value the value to set.
    */
-  public void setStatus(java.lang.CharSequence value) {
+  public void setStatus(Float value) {
     this.status = value;
   }
 
   /**
    * Gets the value of the 'building' field.
    */
-  public java.lang.CharSequence getBuilding() {
+  public CharSequence getBuilding() {
     return building;
   }
 
@@ -129,23 +129,23 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
    * Sets the value of the 'building' field.
    * @param value the value to set.
    */
-  public void setBuilding(java.lang.CharSequence value) {
+  public void setBuilding(CharSequence value) {
     this.building = value;
   }
 
   /** Creates a new EventMessage RecordBuilder */
-  public static Message.EventMessage.Builder newBuilder() {
-    return new Message.EventMessage.Builder();
+  public static Builder newBuilder() {
+    return new Builder();
   }
   
   /** Creates a new EventMessage RecordBuilder by copying an existing Builder */
-  public static Message.EventMessage.Builder newBuilder(Message.EventMessage.Builder other) {
-    return new Message.EventMessage.Builder(other);
+  public static Builder newBuilder(Builder other) {
+    return new Builder(other);
   }
   
   /** Creates a new EventMessage RecordBuilder by copying an existing EventMessage instance */
-  public static Message.EventMessage.Builder newBuilder(Message.EventMessage other) {
-    return new Message.EventMessage.Builder(other);
+  public static Builder newBuilder(EventMessage other) {
+    return new Builder(other);
   }
   
   /**
@@ -154,19 +154,19 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventMessage>
     implements org.apache.avro.data.RecordBuilder<EventMessage> {
 
-    private java.lang.CharSequence machine;
-    private java.lang.CharSequence id;
-    private java.lang.CharSequence date;
-    private java.lang.CharSequence status;
-    private java.lang.CharSequence building;
+    private CharSequence machine;
+    private CharSequence id;
+    private long date;
+    private float status;
+    private CharSequence building;
 
     /** Creates a new Builder */
     private Builder() {
-      super(Message.EventMessage.SCHEMA$);
+      super(EventMessage.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(Message.EventMessage.Builder other) {
+    private Builder(Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.machine)) {
         this.machine = data().deepCopy(fields()[0].schema(), other.machine);
@@ -191,8 +191,8 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     }
     
     /** Creates a Builder by copying an existing EventMessage instance */
-    private Builder(Message.EventMessage other) {
-            super(Message.EventMessage.SCHEMA$);
+    private Builder(EventMessage other) {
+            super(EventMessage.SCHEMA$);
       if (isValidValue(fields()[0], other.machine)) {
         this.machine = data().deepCopy(fields()[0].schema(), other.machine);
         fieldSetFlags()[0] = true;
@@ -216,12 +216,12 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     }
 
     /** Gets the value of the 'machine' field */
-    public java.lang.CharSequence getMachine() {
+    public CharSequence getMachine() {
       return machine;
     }
     
     /** Sets the value of the 'machine' field */
-    public Message.EventMessage.Builder setMachine(java.lang.CharSequence value) {
+    public Builder setMachine(CharSequence value) {
       validate(fields()[0], value);
       this.machine = value;
       fieldSetFlags()[0] = true;
@@ -234,19 +234,19 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     }
     
     /** Clears the value of the 'machine' field */
-    public Message.EventMessage.Builder clearMachine() {
+    public Builder clearMachine() {
       machine = null;
       fieldSetFlags()[0] = false;
       return this;
     }
 
     /** Gets the value of the 'id' field */
-    public java.lang.CharSequence getId() {
+    public CharSequence getId() {
       return id;
     }
     
     /** Sets the value of the 'id' field */
-    public Message.EventMessage.Builder setId(java.lang.CharSequence value) {
+    public Builder setId(CharSequence value) {
       validate(fields()[1], value);
       this.id = value;
       fieldSetFlags()[1] = true;
@@ -259,19 +259,19 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     }
     
     /** Clears the value of the 'id' field */
-    public Message.EventMessage.Builder clearId() {
+    public Builder clearId() {
       id = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /** Gets the value of the 'date' field */
-    public java.lang.CharSequence getDate() {
+    public Long getDate() {
       return date;
     }
     
     /** Sets the value of the 'date' field */
-    public Message.EventMessage.Builder setDate(java.lang.CharSequence value) {
+    public Builder setDate(long value) {
       validate(fields()[2], value);
       this.date = value;
       fieldSetFlags()[2] = true;
@@ -284,19 +284,18 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     }
     
     /** Clears the value of the 'date' field */
-    public Message.EventMessage.Builder clearDate() {
-      date = null;
+    public Builder clearDate() {
       fieldSetFlags()[2] = false;
       return this;
     }
 
     /** Gets the value of the 'status' field */
-    public java.lang.CharSequence getStatus() {
+    public Float getStatus() {
       return status;
     }
     
     /** Sets the value of the 'status' field */
-    public Message.EventMessage.Builder setStatus(java.lang.CharSequence value) {
+    public Builder setStatus(float value) {
       validate(fields()[3], value);
       this.status = value;
       fieldSetFlags()[3] = true;
@@ -309,19 +308,18 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     }
     
     /** Clears the value of the 'status' field */
-    public Message.EventMessage.Builder clearStatus() {
-      status = null;
+    public Builder clearStatus() {
       fieldSetFlags()[3] = false;
       return this;
     }
 
     /** Gets the value of the 'building' field */
-    public java.lang.CharSequence getBuilding() {
+    public CharSequence getBuilding() {
       return building;
     }
     
     /** Sets the value of the 'building' field */
-    public Message.EventMessage.Builder setBuilding(java.lang.CharSequence value) {
+    public Builder setBuilding(CharSequence value) {
       validate(fields()[4], value);
       this.building = value;
       fieldSetFlags()[4] = true;
@@ -334,7 +332,7 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     }
     
     /** Clears the value of the 'building' field */
-    public Message.EventMessage.Builder clearBuilding() {
+    public Builder clearBuilding() {
       building = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -344,11 +342,11 @@ public class EventMessage extends org.apache.avro.specific.SpecificRecordBase im
     public EventMessage build() {
       try {
         EventMessage record = new EventMessage();
-        record.machine = fieldSetFlags()[0] ? this.machine : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.id = fieldSetFlags()[1] ? this.id : (java.lang.CharSequence) defaultValue(fields()[1]);
-        record.date = fieldSetFlags()[2] ? this.date : (java.lang.CharSequence) defaultValue(fields()[2]);
-        record.status = fieldSetFlags()[3] ? this.status : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.building = fieldSetFlags()[4] ? this.building : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.machine = fieldSetFlags()[0] ? this.machine : (CharSequence) defaultValue(fields()[0]);
+        record.id = fieldSetFlags()[1] ? this.id : (CharSequence) defaultValue(fields()[1]);
+        record.date = fieldSetFlags()[2] ? this.date : (Long) defaultValue(fields()[2]);
+        record.status = fieldSetFlags()[3] ? this.status : (Float) defaultValue(fields()[3]);
+        record.building = fieldSetFlags()[4] ? this.building : (CharSequence) defaultValue(fields()[4]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
