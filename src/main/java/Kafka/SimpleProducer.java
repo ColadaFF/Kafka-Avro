@@ -2,24 +2,28 @@ package Kafka;
 
 import Message.EventMessage;
 import Message.EventMessageSerializer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.Producer;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class SimpleProducer {
     private final Producer<String, byte[]> kafkaProducer;
-
+    private static final Logger logger = LoggerFactory.getLogger(SimpleProducer.class);
 
     public SimpleProducer() {
+        logger.debug("added props");
         Properties props = new Properties();
-        props.put("bootstrap.servers", "192.168.1.54:9092");
-        props.put("acks", "all");
-        props.put("retries", 10);
+        props.put("bootstrap.servers", "52.2.239.144:9092");
+        props.put("acks", "1");
+        props.put("retries", 0);
+        props.put("compression.type", "gzip");
         props.put("batch.size", 16384);
         props.put("linger.ms", 1);
         props.put("buffer.memory", 33554432);
@@ -28,8 +32,13 @@ public class SimpleProducer {
         kafkaProducer = new KafkaProducer(props);
     }
 
-    public void publish(byte[] event, String Id) {
-        kafkaProducer.send(new ProducerRecord<String, byte[]>("play-stream", Id, event));
+    public void publish(byte[] event, String Id) throws ExecutionException, InterruptedException {
+        logger.debug("Send message");
+        RecordMetadata m = kafkaProducer.send(new ProducerRecord<String, byte[]>(
+                "events", Id, event)).get();
+        System.out.println("Message produced, offset: " + m.offset());
+        System.out.println("Message produced, partition : " + m.partition());
+        System.out.println("Message produced, topic: " + m.topic());
     }
 
     public static void main(String[] args) {
@@ -44,12 +53,18 @@ public class SimpleProducer {
         Random rand = new Random();
         try {
             EventMessageSerializer eventMessageSerializer = new EventMessageSerializer();
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 10; i++) {
                 event.setStatus(rand.nextFloat() * (maxX - minX) + minX);
                 event.setMachine(machines[new Random().nextInt(machines.length)]);
                 sp.publish(eventMessageSerializer.serializeMessage(event), event.getId().toString());
             }
+        } catch (EOFException e) {
+            e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
     }
